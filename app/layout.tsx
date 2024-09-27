@@ -27,13 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
+      <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <RootProviders>
-            {children}
-          </RootProviders>
+          <RootProviders>{children}</RootProviders>
         </body>
       </html>
     </ClerkProvider>
