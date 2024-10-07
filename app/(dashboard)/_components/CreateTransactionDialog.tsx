@@ -13,7 +13,10 @@ import {
   CreateTransactionSchema,
   CreateTransactionSchemaType,
 } from "@/schema/transaction";
-import { ReactNode } from "react";
+import {
+  ReactNode,
+  // useState
+} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -41,8 +44,18 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
     },
   });
 
+  // const [open, setOpen] = useState(false);
+  // const handleDialogChange = (isOpen: boolean) => {
+  //   setOpen(isOpen);
+  //   if (!isOpen) {
+  //     form.reset();
+  //   }
+  // };
+
   return (
-    <Dialog>
+    <Dialog
+    // open={open} onOpenChange={handleDialogChange}
+    >
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>

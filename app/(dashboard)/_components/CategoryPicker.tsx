@@ -47,7 +47,7 @@ const CategoryPicker = ({ type }: Props) => {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[200px] p-0 pointer-events-auto">
         <Command
           onSubmit={(e) => {
             e.preventDefault();

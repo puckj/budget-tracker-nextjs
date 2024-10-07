@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -18,6 +20,11 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { TransactionType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
@@ -25,9 +32,11 @@ import {
   CreateCategorySchemaType,
 } from "@/schema/categories";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusSquare } from "lucide-react";
+import { CircleOff, PlusSquare } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
 
 interface Props {
   type: TransactionType;
@@ -39,8 +48,15 @@ const CreateCategoryDialog = ({ type }: Props) => {
     resolver: zodResolver(CreateCategorySchema),
     defaultValues: { type },
   });
+  const handleDialogChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (!isOpen) {
+      form.reset();
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>
         <Button
           variant={"ghost"}
@@ -51,7 +67,7 @@ const CreateCategoryDialog = ({ type }: Props) => {
           Create new
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-primary-foreground">
         <DialogHeader>
           <DialogTitle>
             Create
@@ -63,6 +79,7 @@ const CreateCategoryDialog = ({ type }: Props) => {
             >
               {type}
             </span>
+            category
           </DialogTitle>
           <DialogDescription>
             Categories are used to group your transactions
@@ -79,14 +96,73 @@ const CreateCategoryDialog = ({ type }: Props) => {
                   <FormControl>
                     <Input defaultValue={""} {...field} />
                   </FormControl>
+                  <FormDescription>Your new category name</FormDescription>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="icon"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Icon</FormLabel>
+                  <FormControl>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className="h-[100px] w-full"
+                        >
+                          {form.watch("icon") ? (
+                            <div className="flex flex-col items-center gap-2">
+                              <span className="text-5xl" role="img">
+                                {field.value}
+                              </span>
+                              <p className="text-xs text-muted-foreground">
+                                Click to change
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="flex flex-col items-center gap-2">
+                              <CircleOff className="h-[48px] w-[48px]" />
+                              <p className="text-xs text-muted-foreground">
+                                Click to select
+                              </p>
+                            </div>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-full p-0 pointer-events-auto">
+                        <Picker
+                          data={data}
+                          onEmojiSelect={(emoji: { native: string }) => {
+                            field.onChange(emoji.native);
+                          }}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </FormControl>
                   <FormDescription>
-                    Transaction description (optional)
+                    This is how your category will appear in the app
                   </FormDescription>
                 </FormItem>
               )}
             />
           </form>
         </Form>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button
+              type="button"
+              variant={"secondary"}
+              onClick={() => {
+                form.reset();
+              }}
+            >
+              Cancel
+            </Button>
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
