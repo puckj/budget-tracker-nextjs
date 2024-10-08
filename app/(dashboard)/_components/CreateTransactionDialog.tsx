@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import {
@@ -13,10 +14,7 @@ import {
   CreateTransactionSchema,
   CreateTransactionSchemaType,
 } from "@/schema/transaction";
-import {
-  ReactNode,
-  // useState
-} from "react";
+import { ReactNode, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -44,18 +42,23 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
     },
   });
 
-  // const [open, setOpen] = useState(false);
-  // const handleDialogChange = (isOpen: boolean) => {
-  //   setOpen(isOpen);
-  //   if (!isOpen) {
-  //     form.reset();
-  //   }
-  // };
+  const handleCategoryChange = useCallback(
+    (value: string) => {
+      form.setValue("categoty", value);
+    },
+    [form],
+  );
+
+  const [open, setOpen] = useState(false);
+  const handleDialogChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (!isOpen) {
+      form.reset();
+    }
+  };
 
   return (
-    <Dialog
-    // open={open} onOpenChange={handleDialogChange}
-    >
+    <Dialog open={open} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -104,21 +107,29 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
                 </FormItem>
               )}
             />
+            Transaction: {form.watch("description")},{form.watch("amount")},
+            {form.watch("categoty")}
             <div className="flex items-center justify-between gap-2">
               <FormField
                 control={form.control}
                 name="categoty"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <CategoryPicker type={type} />
-                    </FormControl>
-                    <FormDescription>
-                      Select a category for this transaction
-                    </FormDescription>
-                  </FormItem>
-                )}
+                render={({ field }) => {
+                  // console.log(field);
+                  return (
+                    <FormItem>
+                      <FormLabel>Category</FormLabel>
+                      <FormControl>
+                        <CategoryPicker
+                          type={type}
+                          onChange={handleCategoryChange}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Select a category for this transaction
+                      </FormDescription>
+                    </FormItem>
+                  );
+                }}
               />
             </div>
           </form>
