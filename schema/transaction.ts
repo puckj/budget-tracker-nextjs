@@ -4,7 +4,7 @@ export const CreateTransactionSchema = z.object({
   amount: z.coerce.number().positive().multipleOf(0.01),
   description: z.string().optional(),
   date: z.coerce.date(),
-  categoty: z.string(),
+  category: z.string(),
   type: z.union([z.literal("income"), z.literal("expense")]),
 });
 

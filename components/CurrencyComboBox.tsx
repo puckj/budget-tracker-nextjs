@@ -48,7 +48,7 @@ export function CurrencyComboBox() {
     if (userCurrency) setSelectedOptionDisplay(userCurrency);
   }, [userSettings.data]);
 
-  const mutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: UpdateUserCurrency, //กำหนดให้ UpdateUserCurrency เป็นฟังชั่นทำงานสำหรับ mutation นี้
     onSuccess: (data: UserSettings) => {
       toast.success(`Currency updated successfully 🎉`, {
@@ -75,9 +75,9 @@ export function CurrencyComboBox() {
       toast.loading("Update currency...", {
         id: "update-currency",
       });
-      mutation.mutate(currency.value); // ส่ง currency.value ไปให้กับ mutation
+      mutate(currency.value); // ส่ง currency.value ไปให้กับ mutation
     },
-    [mutation],
+    [mutate],
   );
 
   if (isDesktop) {
@@ -88,7 +88,7 @@ export function CurrencyComboBox() {
             <Button
               variant="outline"
               className="w-full justify-start"
-              disabled={mutation.isPending || userSettings.isFetching}
+              disabled={isPending || userSettings.isFetching}
             >
               {selectedOptionDisplay ? (
                 <>{selectedOptionDisplay.label}</>
@@ -112,7 +112,7 @@ export function CurrencyComboBox() {
           <Button
             variant="outline"
             className="w-full justify-start"
-            disabled={mutation.isPending || userSettings.isFetching}
+            disabled={isPending || userSettings.isFetching}
           >
             {selectedOptionDisplay ? (
               <>{selectedOptionDisplay.label}</>
