@@ -114,7 +114,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
   return (
     <Dialog open={open} onOpenChange={handleDialogChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-background">
         <DialogHeader>
           <DialogTitle>
             Create a new
@@ -189,7 +189,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
                 control={form.control}
                 name="date"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col mb-auto">
                     <FormLabel>Transaction date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>

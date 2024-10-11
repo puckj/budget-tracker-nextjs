@@ -49,7 +49,10 @@ const MobileNavBar = () => {
               <Menu />
             </Button>
           </SheetTrigger>
-          <SheetContent className="w-[400px] sm:w-[540px]" side="left">
+          <SheetContent
+            className="w-[400px] sm:w-[540px] bg-primary-foreground"
+            side="left"
+          >
             <Logo />
             <div className="flex flex-col gap-1 pt-4">
               {navbarItemsData.map((item, index) => (

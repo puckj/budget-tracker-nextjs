@@ -36,7 +36,7 @@ export function CurrencyComboBox() {
     // useQuery จะทำการ Refetch ข้อมูลอยู่เสมอ
     queryKey: ["userSettings"],
     queryFn: () => fetch("/api/user-settings").then((res) => res.json()),
-    staleTime: 1000 * 60 * 5, // ตั้งเวลาว่าข้อมูลนี้จะไม่ล้าสมัยเป็นเวลา 5 นาที
+    // staleTime: 1000 * 60 * 5, // ตั้งเวลาว่าข้อมูลนี้จะไม่ล้าสมัยเป็นเวลา 5 นาที
     refetchOnWindowFocus: false, // ปิดการดึงข้อมูลใหม่เมื่อหน้าต่างกลับมาโฟกัส
   });
 

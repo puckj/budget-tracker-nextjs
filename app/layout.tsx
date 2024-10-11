@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import RootProviders from "@/components/providers/RootProviders";
+import RootProvider from "@/components/providers/RootProvider";
 import { Toaster } from "sonner";
+import ClerkProviderWrapper from "@/components/providers/ClerkProviderWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,15 +27,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Toaster richColors position="bottom-right" />
-          <RootProviders>{children}</RootProviders>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <RootProvider>
+          <ClerkProviderWrapper>
+            <Toaster richColors position="bottom-right" />
+            {children}
+          </ClerkProviderWrapper>
+        </RootProvider>
+      </body>
+    </html>
   );
 }

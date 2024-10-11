@@ -58,10 +58,25 @@
     std-env "^3.7.0"
     swr "^2.2.0"
 
+"@clerk/themes@^2.1.35":
+  version "2.1.35"
+  resolved "https://registry.yarnpkg.com/@clerk/themes/-/themes-2.1.35.tgz#7c9469c1476aea7d18d8dbd999070dd30ca3d7be"
+  integrity sha512-woISi7Li+hUrFRQofELgpjr0gYOMK39m+ljW6EcOLiGWmJPJiUqOADS1gPY3kzH/qnO+6jJYWtu4bn8NsSH+Sw==
+  dependencies:
+    "@clerk/types" "4.25.0"
+    tslib "2.4.1"
+
 "@clerk/types@4.22.0":
   version "4.22.0"
   resolved "https://registry.yarnpkg.com/@clerk/types/-/types-4.22.0.tgz#c34def6b4b79cb194af3c56f71384bfe52792ede"
   integrity sha512-QSs8NzZlb1QyFuPf52M1Rjg+BO0/ZVMUYT/YLzZvMdhKpwOn5woVxXTlisqHxcidJqSXvmYAwxL4PZ0LFs89RQ==
+  dependencies:
+    csstype "3.1.1"
+
+"@clerk/types@4.25.0":
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/@clerk/types/-/types-4.25.0.tgz#932520c2381b6686ff1cff816f276b51e5472590"
+  integrity sha512-p2IyJ0q5WF1e976L1pS1J6Mb5ducfkUC31DR1EvMjPwJkrlWJdAMCPc+zqRRAePVy/JBVK2gEKbUVtJ6/jrpag==
   dependencies:
     csstype "3.1.1"
 

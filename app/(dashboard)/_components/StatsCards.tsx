@@ -23,6 +23,7 @@ const StatsCards = ({ from, to, userSettings }: Props) => {
       fetch(
         `/api/stats/balance?from=${DateToUTCDate(from)}&to=${DateToUTCDate(to)}`,
       ).then((res) => res.json()),
+    refetchOnWindowFocus: false, // ปิดการดึงข้อมูลใหม่เมื่อหน้าต่างกลับมาโฟกัส
   });
 
   const formatter = useMemo(() => {
@@ -79,7 +80,7 @@ const StatCard = ({
 }: {
   formatter: Intl.NumberFormat;
   icon: ReactNode;
-  title: String;
+  title: string;
   value: number;
 }) => {
   const formatFn = useCallback(
