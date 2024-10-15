@@ -103,9 +103,15 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
     (values: CreateTransactionSchemaType) => {
       toast.loading("Creating transaction...", { id: "create-transaction" });
 
+      // Ensure the time is always set to midnight, regardless of selection
+      const selectedDate = new Date(values.date);
+      selectedDate.setHours(0, 0, 0, 0); // Set the time to midnight
+      // console.log(selectedDate);
+
       mutate({
         ...values,
-        date: DateToUTCDate(values.date),
+        date: DateToUTCDate(selectedDate),
+        // date: DateToUTCDate(values.date),
       });
     },
     [mutate],
@@ -163,6 +169,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
             />
             {/* Transaction: {form.watch("description")},{form.watch("amount")},
             {form.watch("category")} */}
+            {/* Transaction: {form.watch("date").toISOString()} */}
             <div className="flex items-center justify-between gap-2">
               <FormField
                 control={form.control}
@@ -215,8 +222,12 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
                           mode="single"
                           selected={field.value}
                           onSelect={(value) => {
-                            console.log(value);
-                            if (!value) return;
+                            // console.log(value);
+                            if (!value) {
+                              console.log("shi");
+
+                              return;
+                            }
                             field.onChange(value);
                           }}
                           initialFocus
