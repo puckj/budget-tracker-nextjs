@@ -5,6 +5,7 @@ import { Coins, HandCoins } from "lucide-react";
 import { redirect } from "next/navigation";
 import CreateTransactionDialog from "./_components/CreateTransactionDialog";
 import Overview from "./_components/Overview";
+import History from "./_components/History";
 
 const page = async () => {
   const user = await currentUser();
@@ -50,6 +51,7 @@ const page = async () => {
         </div>
       </div>
       <Overview userSettings={userSettings} />
+      <History userSettings={userSettings} />
     </div>
   );
 };
