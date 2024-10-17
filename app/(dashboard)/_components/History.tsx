@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -235,7 +236,12 @@ const TooltipRow = ({
 }) => {
   const formattingFn = useCallback(
     (value: number) => {
-      // console.log(formatter.format(value), label, " formatter.format(value)");
+      // console.log(
+      //   value,
+      //   formatter.format(value),
+      //   label,
+      //   " formatter.format(value)",
+      // );
       return formatter.format(value);
     },
     [formatter],
