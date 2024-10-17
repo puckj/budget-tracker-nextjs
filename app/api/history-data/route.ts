@@ -39,7 +39,7 @@ export async function GET(request: Request) {
     year: queryParams.data.year,
   });
 
-  console.log(data);
+  // console.log(data);
 
   return Response.json(data);
 }
