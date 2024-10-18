@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import { Category } from "@prisma/client";
 import DeleteCategoryDialog from "../_components/DeleteCategoryDialog";
 
-const page = () => {
+const ManagePage = () => {
   return (
     <>
       <div className="border-b bg-card">
@@ -51,7 +51,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default ManagePage;
 
 const CategoryList = ({ type }: { type: TransactionType }) => {
   const categoriesQuery = useQuery({

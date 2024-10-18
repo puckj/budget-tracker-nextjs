@@ -14,7 +14,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const page = async () => {
+const WizardPage = async () => {
   const user = await currentUser();
   if (!user) {
     redirect("/sign-in");
@@ -57,4 +57,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default WizardPage;

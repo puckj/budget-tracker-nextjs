@@ -7,7 +7,8 @@ import CreateTransactionDialog from "./_components/CreateTransactionDialog";
 import Overview from "./_components/Overview";
 import History from "./_components/History";
 
-const page = async () => {
+const DashboardPage = async () => {
+  console.log("++++++++++ DashboardPage ++++++++++");
   const user = await currentUser();
   if (!user) redirect("/sign-in");
   const userSettings = await prisma.userSettings.findUnique({
@@ -16,6 +17,7 @@ const page = async () => {
     },
   });
   if (!userSettings) redirect("/wizard");
+  // console.log(user, userSettings, " userSettings");
 
   return (
     <div className="h-full bg-background">
@@ -56,4 +58,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default DashboardPage;
