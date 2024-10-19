@@ -8,7 +8,8 @@ import Overview from "./_components/Overview";
 import History from "./_components/History";
 
 const DashboardPage = async () => {
-  console.log("++++++++++ DashboardPage ++++++++++");
+  try {
+      console.log("++++++++++ DashboardPage ++++++++++");
   const user = await currentUser();
   if (!user) redirect("/sign-in");
   const userSettings = await prisma.userSettings.findUnique({
@@ -56,6 +57,11 @@ const DashboardPage = async () => {
       <History userSettings={userSettings} />
     </div>
   );
+  } catch (error) {
+    // redirect("/sign-in");
+    console.log(error, 'Dashboard error');
+    
+  }
 };
 
 export default DashboardPage;
