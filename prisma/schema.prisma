@@ -9,17 +9,17 @@ generator client {
 }
 
 // Dev
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
 
 // // Production
-// datasource db {
-//   provider  = "postgresql"
-//   url       = env("POSTGRES_PRISMA_URL")
-//   directUrl = env("POSTGRES_URL_NON_POOLING")
-// }
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
 
 model UserSettings {
   userId   String @id
